@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025年河南省体育产业创新创业大赛信阳分赛</title>
+    <style>
+    /* 全局样式 */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    :root {
+        --primary-color: #D4AF37;  /* 金色主题 */
+        --secondary-color: #8B0000;  /* 深红色 */
+        --text-color: #333;
+        --background-color: #f5f7fa;
+        --white: #fff;
+        --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    /* 背景样式 */
+    .background-animation {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.2)),
+                    url('../tupian/780.jfif') center/cover no-repeat fixed;
+        filter: brightness(1.2) contrast(1.1);
+    }
+
+    /* 舞台灯光效果 */
+    .background-animation::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle at 50% 10%, 
+                    rgba(255, 223, 0, 0.3) 0%,
+                    rgba(255, 223, 0, 0.2) 20%,
+                    transparent 60%);
+        animation: stageLight 4s ease-in-out infinite;
+        opacity: 0.8;
+    }
+
+    /* 颁奖台光效 */
+    .background-animation::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 300px;
+        height: 200px;
+        background: radial-gradient(ellipse at center,
+                    rgba(255, 255, 255, 0.4) 0%,
+                    transparent 70%);
+        animation: podiumGlow 3s ease infinite;
+        opacity: 0.9;
+    }
+
+    /* 舞台灯光动画 */
+    @keyframes stageLight {
+        0%, 100% {
+            opacity: 0.8;
+            transform: scale(1);
+        }
+        50% {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+    }
+
+    /* 颁奖台光效动画 */
+    @keyframes podiumGlow {
+        0%, 100% {
+            opacity: 0.7;
+            transform: translateX(-50%) scale(1);
+        }
+        50% {
+            opacity: 1;
+            transform: translateX(-50%) scale(1.1);
+        }
+    }
+
+    body {
+        font-family: "Microsoft YaHei", "微软雅黑", sans-serif;
+        min-height: 100vh;
+        padding: 20px;
+        line-height: 1.6;
+        color: var(--text-color);
+        background: rgba(255, 255, 255, 0.92);
+        position: relative;
+        overflow-x: hidden;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    /* 奖项卡片样式 */
+    .award-card {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 40px;
+        border: 2px solid var(--primary-color);
+        backdrop-filter: blur(10px);
+    }
+
+    .title {
+        color: var(--text-color);
+        font-size: 2em;
+        text-align: center;
+        margin-bottom: 30px;
+        padding: 20px 0;
+        position: relative;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+
+    /* 金奖样式 */
+    .award-badge {
+        text-align: center;
+        margin: 30px 0;
+        position: relative;
+    }
+
+    .medal {
+        display: inline-block;
+        font-size: 4.5em;
+        font-weight: bold;
+        color: var(--primary-color);
+        text-shadow: 
+            0 0 15px rgba(212, 175, 55, 0.7),
+            0 0 30px rgba(212, 175, 55, 0.5),
+            2px 2px 4px rgba(0,0,0,0.3);
+        background: linear-gradient(45deg, 
+            #FFD700, #FDB931, #FFD700, #FFA500, #FFD700);
+        background-size: 200% 200%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        position: relative;
+        padding: 30px 80px;
+        transform: scale(1);
+        transition: transform 0.3s ease, text-shadow 0.3s ease;
+        animation: shimmerText 3s linear infinite;
+    }
+
+    @keyframes shimmerText {
+        0% {
+            background-position: 0% 50%;
+        }
+        100% {
+            background-position: 200% 50%;
+        }
+    }
+
+    .medal:hover {
+        transform: scale(1.15);
+        text-shadow: 
+            0 0 20px rgba(212, 175, 55, 0.8),
+            0 0 40px rgba(212, 175, 55, 0.6),
+            2px 2px 6px rgba(0,0,0,0.4);
+    }
+
+    .medal-shine {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 250px;
+        height: 250px;
+        background: radial-gradient(circle, 
+            rgba(255,223,0,0.3) 0%,
+            rgba(255,215,0,0.2) 30%,
+            rgba(255,215,0,0.1) 50%,
+            rgba(255,215,0,0) 70%);
+        animation: shine 3s infinite;
+        filter: blur(5px);
+    }
+
+    @keyframes shine {
+        0% {
+            opacity: 0.3;
+            transform: translate(-50%, -50%) scale(1) rotate(0deg);
+        }
+        50% {
+            opacity: 0.6;
+            transform: translate(-50%, -50%) scale(1.3) rotate(180deg);
+        }
+        100% {
+            opacity: 0.3;
+            transform: translate(-50%, -50%) scale(1) rotate(360deg);
+        }
+    }
+
+    .info-section {
+        margin-top: 40px;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 15px;
+        padding: 20px;
+    }
+
+    .info-item {
+        margin: 20px 0;
+        padding: 20px;
+        border-left: 4px solid var(--primary-color);
+        background: rgba(212, 175, 55, 0.05);
+        border-radius: 0 10px 10px 0;
+        transition: transform 0.3s ease;
+        backdrop-filter: blur(5px);
+    }
+
+    .info-item:hover {
+        transform: translateX(10px);
+        background: rgba(212, 175, 55, 0.1);
+    }
+
+    .label {
+        font-weight: bold;
+        color: var(--text-color);
+        margin-right: 15px;
+        font-size: 1.1em;
+    }
+
+    .content {
+        color: #666;
+        font-size: 1.1em;
+    }
+
+    /* 地图区域样式 */
+    .map-section {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        padding: 20px;
+        margin-bottom: 40px;
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(10px);
+    }
+
+    #map {
+        width: 100%;
+        height: 400px;
+        border-radius: 10px;
+    }
+
+    .section-title {
+        color: var(--text-color);
+        text-align: center;
+        margin-bottom: 30px;
+        position: relative;
+        padding-bottom: 15px;
+    }
+
+    .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 3px;
+        background: var(--primary-color);
+        border-radius: 2px;
+    }
+
+    /* 图片画廊样式 */
+    .gallery-section {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        padding: 20px;
+        margin-bottom: 40px;
+        box-shadow: var(--shadow);
+    }
+
+    .gallery {
+        display: flex;
+        overflow-x: auto;
+        gap: 20px;
+        padding: 20px 0;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .gallery-item {
+        flex: 0 0 auto;
+        width: 300px;
+        position: relative;
+        transition: transform 0.3s ease;
+        cursor: pointer;
+    }
+
+    .gallery-item:hover {
+        transform: translateY(-5px);
+    }
+
+    .gallery-item img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 10px;
+        box-shadow: var(--shadow);
+        transition: transform 0.3s ease;
+    }
+
+    .gallery-item:hover img {
+        transform: scale(1.05);
+    }
+
+    .gallery-caption {
+        text-align: center;
+        margin-top: 10px;
+        color: var(--text-color);
+        font-weight: bold;
+        opacity: 0;
+        transform: translateY(10px);
+        transition: all 0.3s ease;
+    }
+
+    .gallery-item:hover .gallery-caption {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* 页脚样式 */
+    .footer {
+        text-align: center;
+        padding: 20px;
+        color: var(--text-color);
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 10px;
+        margin-top: 40px;
+        box-shadow: var(--shadow);
+    }
+
+    /* 滚动条样式 */
+    .gallery::-webkit-scrollbar {
+        height: 8px;
+    }
+
+    .gallery::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+    }
+
+    .gallery::-webkit-scrollbar-thumb {
+        background: var(--primary-color);
+        border-radius: 4px;
+    }
+
+    .gallery::-webkit-scrollbar-thumb:hover {
+        background: var(--secondary-color);
+    }
+
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+        .container {
+            padding: 10px;
+        }
+
+        .award-card {
+            padding: 20px;
+        }
+
+        .title {
+            font-size: 1.5em;
+        }
+
+        .medal {
+            font-size: 3em;
+            padding: 20px 40px;
+        }
+
+        .gallery {
+            padding: 10px 0;
+        }
+
+        .gallery-item {
+            width: 250px;
+        }
+
+        .gallery-item img {
+            height: 150px;
+        }
+
+        .info-item {
+            padding: 15px;
+        }
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .award-card,
+    .map-section,
+    .gallery-section {
+        animation: fadeIn 1s ease-out forwards;
+    }
+    </style>
+</head>
+<body>
+    <div class="background-animation"></div>
+    <div class="container">
+        <!-- 奖项信息卡片 -->
+        <div class="award-card">
+            <h1 class="title">2025年河南省体育产业创新创业大赛信阳分赛</h1>
+            <div class="award-badge">
+                <div class="medal">金奖</div>
+                <div class="medal-shine"></div>
+            </div>
+            
+            <div class="info-section">
+                <div class="info-item">
+                    <span class="label">时间：</span>
+                    <span class="content">2025年</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">举办单位：</span>
+                    <span class="content">河南省体育局</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">举办地点：</span>
+                    <span class="content">信阳人民体育广场</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 地图区域 -->
+        <div class="map-section">
+            <h2 class="section-title">比赛地点</h2>
+            <div id="map"></div>
+        </div>
+
+        <!-- 活动图片展示 -->
+        <div class="gallery-section">
+            <h2 class="section-title">活动掠影</h2>
+            <div class="gallery">
+                <div class="gallery-item">
+                    <img src="../tupian/微信图片_20250621123203.jpg" alt="活动照片1">
+                    <div class="gallery-caption">开幕式现场</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="../tupian/微信图片_20250621123328.jpg" alt="活动照片2">
+                    <div class="gallery-caption">比赛进行中</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="../tupian/微信图片_20250621123323.jpg" alt="活动照片3">
+                    <div class="gallery-caption">颁奖仪式</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 页脚 -->
+        <footer class="footer">
+            <p>© 2025 河南省体育产业创新创业大赛信阳分赛</p>
+        </footer>
+    </div>
+
+    <!-- 高德地图配置 -->
+    <script type="text/javascript">
+        window._AMapSecurityConfig = {
+            serviceHost: "http://192.168.1.124:80/_AMapService",
+            securityJsCode: "3ebf66f6dd198656836dd03cacfd29e8"
+        }
+        
+        // 全局初始化函数
+        window.initMap = function() {
+            // 地图初始化代码会在script.js中定义
+            if (typeof AMapInit === 'function') {
+                AMapInit();
+            }
+        };
+    </script>
+    <script type="text/javascript" src="https://webapi.amap.com/maps?v=2.0&key=86a99384b91747d618a39aec954955e7&plugin=AMap.ToolBar,AMap.Scale,AMap.Geolocation&callback=initMap"></script>
+    <script>
+    // 等待DOM加载完成
+    document.addEventListener('DOMContentLoaded', function() {
+        // 初始化高德地图
+        try {
+            initMap();
+        } catch (error) {
+            console.error('地图初始化失败:', error);
+            document.getElementById('map').innerHTML = '<div style="padding: 20px; text-align: center;">地图加载失败，请刷新页面重试</div>';
+        }
+
+        // 初始化图片画廊
+        initGallery();
+    });
+
+    // 地图初始化函数
+    function AMapInit() {
+        try {
+            // 创建地图实例
+            const map = new AMap.Map('map', {
+                zoom: 13,  // 初始缩放级别
+                center: [114.091224, 32.128278],  // 信阳市中心坐标
+                viewMode: '2D'  // 使用2D视图
+            });
+
+            // 添加工具栏控件
+            map.addControl(new AMap.ToolBar({
+                position: 'RB'
+            }));
+
+            // 添加比例尺控件
+            map.addControl(new AMap.Scale());
+
+            // 添加定位控件
+            map.addControl(new AMap.Geolocation({
+                position: 'RB',
+                offset: [10, 20]
+            }));
+
+            return map;
+        } catch (error) {
+            console.error('地图初始化失败:', error);
+            document.getElementById('map').innerHTML = '<div style="padding: 20px; text-align: center;">地图加载失败，请刷新页面重试</div>';
+        }
+    }
+
+    // 初始化图片画廊
+    function initGallery() {
+        const gallery = document.querySelector('.gallery');
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        // 鼠标事件
+        gallery.addEventListener('mousedown', (e) => {
+            isDown = true;
+            gallery.classList.add('active');
+            startX = e.pageX - gallery.offsetLeft;
+            scrollLeft = gallery.scrollLeft;
+        });
+
+        gallery.addEventListener('mouseleave', () => {
+            isDown = false;
+            gallery.classList.remove('active');
+        });
+
+        gallery.addEventListener('mouseup', () => {
+            isDown = false;
+            gallery.classList.remove('active');
+        });
+
+        gallery.addEventListener('mousemove', (e) => {
+            if(!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - gallery.offsetLeft;
+            const walk = (x - startX) * 2;
+            gallery.scrollLeft = scrollLeft - walk;
+        });
+
+        // 触摸事件
+        gallery.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].pageX - gallery.offsetLeft;
+            scrollLeft = gallery.scrollLeft;
+        });
+
+        gallery.addEventListener('touchmove', (e) => {
+            if (e.touches.length !== 1) return;
+            e.preventDefault();
+            const x = e.touches[0].pageX - gallery.offsetLeft;
+            const walk = (x - startX) * 2;
+            gallery.scrollLeft = scrollLeft - walk;
+        });
+
+        // 图片加载优化
+        const images = gallery.querySelectorAll('img');
+        images.forEach(img => {
+            img.addEventListener('load', () => {
+                img.classList.add('loaded');
+            });
+        });
+    }
+
+    // 添加页面载入动画
+    window.addEventListener('load', () => {
+        document.body.classList.add('loaded');
+    });
+    </script>
+</body>
+</html> 
